@@ -1,32 +1,27 @@
 import userModel from "../models/userModel.js";
 
 export const registerController = async (req, res, next) => {
-  const { name, email, password } = req.body;
-
-  // validate
+  const { name, email, password, lastName } = req.body;
+  //validate
   if (!name) {
-    next("Name is required");
+    next("name is required");
   }
   if (!email) {
-    next("Email is required");
+    next("email is required");
   }
   if (!password) {
-    next("Password is required and must be 6 characters long");
+    next("password is required and greater than 6 character");
   }
-
-  // existing user
-  const existingUser = await userModel.findOne({ email });
-  if (existingUser) {
-    next("Email already exists ! Please login");
+  const exisitingUser = await userModel.findOne({ email });
+  if (exisitingUser) {
+    next("Email Already Register Please Login");
   }
-  const user = await userModel.create({ name, email, password });
-
-  // token
+  const user = await userModel.create({ name, email, password, lastName });
+  //token
   const token = user.createJWT();
-
   res.status(201).send({
     success: true,
-    message: "User created successfully",
+    message: "User Created Successfully",
     user: {
       name: user.name,
       lastName: user.lastName,
