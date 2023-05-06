@@ -1,12 +1,12 @@
 import express from "express";
-import userAuth from "../middlewares/authMiddleware.js";
-import { testController } from "./../controllers/testController.js";
+import { testPostController } from "../controllers/testController.js";
+import userAuth from "../middelwares/authMiddleware.js";
 
 //router object
 const router = express.Router();
 
-// routes
-router.post("/test", userAuth, testController);
+//routes
+router.post("/test-post", userAuth, testPostController);
 
 //export
 export default router;

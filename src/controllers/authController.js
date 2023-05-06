@@ -34,28 +34,25 @@ export const registerController = async (req, res, next) => {
 
 export const loginController = async (req, res, next) => {
   const { email, password } = req.body;
-
-  // validation
+  //validation
   if (!email || !password) {
-    next("Please provide all fields.");
+    next("Please Provide All Fields");
   }
-
-  // find user by email
+  //find user by email
   const user = await userModel.findOne({ email }).select("+password");
   if (!user) {
-    next("Invalid username or password ! ");
+    next("Invalid Useraname or password");
   }
-
-  // compare password
+  //compare password
   const isMatch = await user.comparePassword(password);
   if (!isMatch) {
-    next("Invalid username or password ! ");
+    next("Invalid Useraname or password");
   }
   user.password = undefined;
   const token = user.createJWT();
-  res.status(200).send({
+  res.status(200).json({
     success: true,
-    message: "Logged in successfully !",
+    message: "Login SUccessfully",
     user,
     token,
   });

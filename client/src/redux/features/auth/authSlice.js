@@ -6,10 +6,8 @@ export const authSlice = createSlice({
     user: null,
   },
   reducers: {
-    setUser: {
-      setUser: (state, action) => {
-        state.user = action.payload;
-      },
+    setUser: (state, action) => {
+      state.user = action.payload;
     },
   },
 });

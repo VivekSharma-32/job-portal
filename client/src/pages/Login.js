@@ -1,20 +1,17 @@
 import React, { useState } from "react";
+import InputFrom from "../components/shared/InputFrom";
 import { Link, useNavigate } from "react-router-dom";
-import InputForm from "../components/shared/InputForm";
 import { useDispatch, useSelector } from "react-redux";
-import Spinner from "../components/shared/Spinner";
-import { hideLoading, showLoading } from "../redux/features/alertSlice";
 import axios from "axios";
+import { hideLoading, showLoading } from "../redux/features/alertSlice";
+import Spinner from "../components/shared/Spinner";
 import { toast } from "react-toastify";
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // hooks
+  //hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   // redux state
   const { loading } = useSelector((state) => state.alerts);
 
@@ -28,14 +25,15 @@ const Login = () => {
         password,
       });
       if (data.success) {
+        dispatch(hideLoading());
         localStorage.setItem("token", data.token);
-        toast.success("Logged in Successfuly");
+        toast.success("Login SUccessfully ");
         navigate("/dashboard");
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Invalid email or password. Please try again");
       dispatch(hideLoading());
+      toast.error("Invalid Credintial please try again!");
+      console.log(error);
     }
   };
   return (
@@ -43,36 +41,35 @@ const Login = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="form-container d-flex align-items-center justify-content-center">
-          <form className="card p-3" onSubmit={handleSubmit}>
+        <div className="form-container">
+          <form className="card p-2" onSubmit={handleSubmit}>
             <img
               src="/assets/images/logo/logo.png"
               alt="logo"
               height={150}
               width={400}
             />
-            <div className="mb-1">
-              <InputForm
-                htmlFor="email"
-                labelText={"Email"}
-                type="email"
-                value={email}
-                handleChange={(e) => setEmail(e.target.value)}
-                name={"email"}
-              />
-              <InputForm
-                htmlFor="password"
-                labelText={"Password"}
-                type="password"
-                value={password}
-                handleChange={(e) => setPassword(e.target.value)}
-                name={"password"}
-              />
-            </div>
 
-            <div className="mt-3 d-flex justify-content-between">
+            <InputFrom
+              htmlFor="email"
+              labelText={"Email"}
+              type={"email"}
+              value={email}
+              handleChange={(e) => setEmail(e.target.value)}
+              name="email"
+            />
+            <InputFrom
+              htmlFor="password"
+              labelText={"Password"}
+              type={"password"}
+              value={password}
+              handleChange={(e) => setPassword(e.target.value)}
+              name="password"
+            />
+
+            <div className="d-flex justify-content-between">
               <p>
-                Not a user. <Link to="/register">Register here!</Link>
+                Not a user <Link to="/register">Register Here!</Link>{" "}
               </p>
               <button type="submit" className="btn btn-primary">
                 Login

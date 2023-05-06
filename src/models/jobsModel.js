@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema(
   {
-    companyName: {
+    company: {
       type: String,
-      required: [true, "Company name is required"],
+      requied: [true, "Companay name is require"],
     },
     position: {
       type: String,
-      required: [true, "Job position is required"],
-      maxLength: 100,
+      required: [true, "Job Position is required"],
+      maxlength: 100,
     },
     status: {
       type: String,
@@ -18,7 +18,7 @@ const jobSchema = new mongoose.Schema(
     },
     workType: {
       type: String,
-      enum: ["full-time", "part-time", "internship", "contract"],
+      enum: ["full-time", "part-time", "internship", "contaract"],
       default: "full-time",
     },
     workLocation: {

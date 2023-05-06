@@ -1,7 +1,6 @@
 import React from "react";
-import "../styles/HomePage.css";
 import { Link } from "react-router-dom";
-
+import "../styles/Homepage.css";
 const HomePage = () => {
   return (
     <>
@@ -10,17 +9,17 @@ const HomePage = () => {
       </video>
       <div className="content">
         <div className="card w-25">
-          <img src="/assets/images/logo/logo.png" alt="" />
+          <img src="/assets/images/logo/logo.png" alt="logo" />
           <hr />
           <div className="card-body" style={{ marginTop: "-60px" }}>
-            <h5>India's No #1 Career Platform</h5>
+            <h5 className="card-title">Indias No #1 Carrer Platform</h5>
             <p className="card-text">
-              Search and manage your jobs with ease. Free and open source job
-              portal application
+              Search and manage your jobs with ease. free and open source job
+              ortal application by techinfoyt
             </p>
             <div className="d-flex justify-content-between mt-5">
               <p>
-                Not a user. <Link to="/register">Register</Link>
+                Not a user Register <Link to="/register">Here !</Link>{" "}
               </p>
               <p>
                 <Link to="/login" className="myBtn">

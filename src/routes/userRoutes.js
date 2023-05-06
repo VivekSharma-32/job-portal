@@ -1,14 +1,18 @@
 import express from "express";
-import userAuth from "./../middlewares/authMiddleware.js";
-import { updateUserController } from "./../controllers/userController.js";
+import {
+  getUserController,
+  updateUserController,
+} from "../controllers/userController.js";
+import userAuth from "../middelwares/authMiddleware.js";
 
-// router object
+//router object
 const router = express.Router();
 
-// routes
-// GET USERS || GET
+//routes
+// GET USER DATA || POST
+router.post("/getUser", userAuth, getUserController);
 
-//Update user || PUT
+// UPDATE USER || PUT
 router.put("/update-user", userAuth, updateUserController);
 
 export default router;

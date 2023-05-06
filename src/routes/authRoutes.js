@@ -1,10 +1,11 @@
 import express from "express";
-import rateLimit from "express-rate-limit";
 import {
-  registerController,
   loginController,
+  registerController,
 } from "../controllers/authController.js";
+import rateLimit from "express-rate-limit";
 
+//ip limiter
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
@@ -12,7 +13,7 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-// router object
+//router object
 const router = express.Router();
 
 //routes
@@ -87,7 +88,7 @@ const router = express.Router();
  *          description: internal serevr error
  */
 
-// Register route | POST
+// REGISTER || POPST
 router.post("/register", limiter, registerController);
 
 /**
@@ -113,7 +114,8 @@ router.post("/register", limiter, registerController);
  *        description: something went wrong
  */
 
-// Login Route | POST
+// LOGIN || POST
 router.post("/login", limiter, loginController);
 
+//export
 export default router;
